@@ -5,7 +5,13 @@ const cors = require('cors');
 const mime = require('mime-types');
 const app = express();
 const bfhlRouter = require('./routes/bfhl');
-app.use(cors()); // <-- Add this
+const corsOptions = {
+    origin: 'https://frontend-cm6tjc5fc-panyas-projects-1c8cb2da.vercel.app/',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+  };
+  
+  app.use(cors(corsOptions)); 
 
 app.use(bodyParser.json({ limit: '10mb' })); 
 
