@@ -6,7 +6,7 @@ const mime = require('mime-types');
 const app = express();
 const bfhlRouter = require('./routes/bfhl');
 const corsOptions = {
-    origin: 'https://frontend-cm6tjc5fc-panyas-projects-1c8cb2da.vercel.app/',
+    origin: 'https://frontend-cm6tjc5fc-panyas-projects-1c8cb2da.vercel.app',  // No trailing slash
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
   };
