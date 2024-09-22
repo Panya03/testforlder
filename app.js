@@ -6,12 +6,25 @@ const app = express();
 const bfhlRouter = require('./routes/bfhl');
 
 // Configure CORS to allow the frontend URL
+const cors = require('cors');
+
 const corsOptions = {
-  origin: 'https://frontend-cm6tjc5fc-panyas-projects-1c8cb2da.vercel.app', // No trailing slash
-  methods: ['GET', 'POST', 'OPTIONS'], // Include 'OPTIONS' for preflight
-  allowedHeaders: ['Content-Type'],  // What headers are allowed
-  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+  origin: (origin, callback) => {
+    if (origin === 'https://frontend-2j4ra21qh-panyas-projects-1c8cb2da.vercel.app' || origin === 'https://testfolder-bh24ymqup-panyas-projects-1c8cb2da.vercel.app') {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  optionsSuccessStatus: 200
 };
+
+app.options('*', cors(corsOptions));  // Preflight request handler
+
+
+app.use(cors(corsOptions));
 
 app.use(cors(corsOptions)); // Apply the CORS middleware
 
